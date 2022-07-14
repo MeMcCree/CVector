@@ -38,6 +38,17 @@
 		free(tmp);																																				\
 	}																																										\
 \
+	void VecResize_##T(Vec_##T* v, uint32_t sz) {																				\
+		if (sz > v->capacity) {																														\
+			v->capacity = sz;																																\
+			T* tmp = v->data;																																\
+			v->data = malloc(sizeof(T) * v->capacity);																			\
+			for (uint32_t _idx = 0; _idx < v->size; _idx++) VecSet_##T(v, _idx, tmp[_idx]);	\
+			free(tmp);																																			\
+		}																																									\
+		v->size = sz;																																			\
+	}																																										\
+\
 	void VecPush_##T(Vec_##T* v, T val) {																								\
 		if (v->size == v->capacity - 1) VecExpand_##T(v);																	\
 		VecSet_##T(v, v->size++, val);																										\

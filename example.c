@@ -18,6 +18,7 @@ int main() {
 
 	Vec_int vi;
 	VecInit_int(&vi);
+	VecResize_int(&vi, 1);
 	
 	srand(time(0));
 	for (uint32_t i = 0; i < 10; i++) {
@@ -27,9 +28,15 @@ int main() {
 		vi.Push(&vi, rand() % 99);
 	}
 
+	printf("vec2 vector:\n");
 	for (uint32_t i = 0; i < v.size; i++) {
 		vec2 v2 = v.Get(&v, i);
-		printf("{%i, %i} : %i\n", v2.x, v2.y, vi.Get(&vi, i));
+		printf("{%i, %i}\n", v2.x, v2.y);
+	}
+
+	printf("int vector:\n");
+	for (uint32_t i = 0; i < vi.size; i++) {
+		printf("%i\n", vi.Get(&vi, i));
 	}
 
 	VecFree_vec2(&v);
